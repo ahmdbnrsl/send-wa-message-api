@@ -10,7 +10,6 @@ const makeWASocket = require('@whiskeysockets/baileys').default;
 const { MongoClient } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
-const connect = require('./connect.js');
 const useMongoDBAuthState = require('./state.js');
 require('dotenv').config();
 
@@ -70,6 +69,7 @@ app.get('/', (req, res) => {
 app.post('/send', async (req, res) => {
     const number = req.body.number + '@s.whatsapp.net';
     const mess = req.body.mess;
+    const rep = req.body.rep;
     const secret = req.body.secret;
     if (secret !== mySecret) {
         return res.status(401).json({ status: 401, message: 'unauthorized!' });
@@ -92,7 +92,7 @@ app.post('/send', async (req, res) => {
                 await sock.sendMessage(
                     number,
                     {
-                        text: 'Hai 👋,\nterimakasih atas pesannya,\nadmin akan segera membalas pesanmu!'
+                        text: rep
                     },
                     { quoted: q }
                 );
