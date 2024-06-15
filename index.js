@@ -22,8 +22,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-let sock;
 const mongoClient = new MongoClient(mongoURL);
+
+(async () => {
+    await mongoClient.connect();
+})();
+
+let sock;
 
 async function connectionLogic() {
     await mongoClient.connect();
