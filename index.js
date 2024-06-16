@@ -66,7 +66,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', async (req, res) => {
-    const number = req.body.number + '@s.whatsapp.net';
+    const num = req.body.number;
+    const number = num?.startsWith('0')
+        ? num?.replace(/\D/g, '').replace('0', '62')
+        : num?.replace(/\D/g, '');
     const mess = req.body.mess;
     const rep = req.body.rep;
     const secret = req.body.secret;
@@ -77,7 +80,7 @@ app.post('/send', async (req, res) => {
         const q = {
             key: {
                 fromMe: false,
-                participant: number
+                participant: number + '@s.whatsapp.net'
             },
             message: {
                 extendedTextMessage: {
@@ -89,7 +92,7 @@ app.post('/send', async (req, res) => {
             const isConnected = () => (sock?.user ? true : false);
             if (isConnected()) {
                 await sock.sendMessage(
-                    number,
+                    number + '@s.whatsapp.net',
                     {
                         text: rep
                     },
