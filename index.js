@@ -55,12 +55,12 @@ async function connectionLogic() {
             }
         }
     });
-    sock.ev.on('messages.update', messageInfo => {
+    /*sock.ev.on('messages.update', messageInfo => {
         console.log('receiving message!');
     });
     sock.ev.on('messages.upsert', async ({ messages, type }) => {
         console.log('receiving message!');
-    });
+    });*/
     sock.ev.on('creds.update', saveCreds);
 }
 
