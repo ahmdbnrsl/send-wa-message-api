@@ -98,7 +98,7 @@ app.post('/send', async (req, res) => {
                     },
                     { quoted: q }
                 );
-                res.json({ status: 'sended' });
+                res.destroy(null);
             }
         }
     } catch (e) {
