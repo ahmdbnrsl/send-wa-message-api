@@ -91,6 +91,7 @@ app.post('/send', async (req, res) => {
         if (number) {
             const isConnected = () => (sock?.user ? true : false);
             if (isConnected()) {
+                res.end();
                 await sock.sendMessage(
                     number + '@s.whatsapp.net',
                     {
@@ -98,7 +99,6 @@ app.post('/send', async (req, res) => {
                     },
                     { quoted: q }
                 );
-                res.destroy(null);
             }
         }
     } catch (e) {
