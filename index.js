@@ -95,7 +95,7 @@ app.post('/send', async (req, res) => {
                 sock.sendMessage('6288216018165@s.whatsapp.net', {
                     text: `Pengirim : wa.me/${number}\n\nPesan : ${mess}`
                 });
-                await sock.sendMessage(
+                sock.sendMessage(
                     number + '@s.whatsapp.net',
                     {
                         text: rep
